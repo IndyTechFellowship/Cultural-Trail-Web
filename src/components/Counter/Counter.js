@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/lib/Button';
 
 export const Counter = (props) => (
   <div>
+    <p>Note: this still shows the counter control that came with the template, but it should show a table of issues in the future</p>
     <h2 className={classes.counterContainer}>
       Counter:
       {' '}

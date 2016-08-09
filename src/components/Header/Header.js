@@ -15,10 +15,10 @@ export const Header = () => (
       </Navbar.Header>
       <Nav>
         <IndexLinkContainer to="/">
-          <NavItem>Home</NavItem>
+          <NavItem>Dashboard</NavItem>
         </IndexLinkContainer>
         <LinkContainer to="/counter">
-          <NavItem>Counter</NavItem>
+          <NavItem>Issues</NavItem>
         </LinkContainer>
       </Nav>
     </Navbar>
