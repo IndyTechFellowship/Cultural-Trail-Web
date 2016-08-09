@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './HomeView.scss'
+import classes from './DashboardView.scss'
 
 // components
 import { Grid, Row, Col, Panel, PageHeader } from 'react-bootstrap'
