@@ -1,17 +1,27 @@
 import React from 'react'
-import { IndexLink, Link } from 'react-router'
 import classes from './Header.scss'
+import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap'
+
+// components
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 export const Header = () => (
   <div>
-    <h1>React Redux Starter Kit</h1>
-    <IndexLink to='/' activeClassName={classes.activeRoute}>
-      Home
-    </IndexLink>
-    {' · '}
-    <Link to='/counter' activeClassName={classes.activeRoute}>
-      Counter
-    </Link>
+    <Navbar>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <a href="#">Cultural Trail</a>
+        </Navbar.Brand>
+      </Navbar.Header>
+      <Nav>
+        <IndexLinkContainer to="/">
+          <NavItem>Home</NavItem>
+        </IndexLinkContainer>
+        <LinkContainer to="/counter">
+          <NavItem>Counter</NavItem>
+        </LinkContainer>
+      </Nav>
+    </Navbar>
   </div>
 )
 
