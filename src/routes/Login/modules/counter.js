@@ -1,7 +1,10 @@
+import fetch from 'isomorphic-fetch'
+
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
+export const RECEIVE_LOGIN_RESPONSE = 'RECEIVE_LOGIN_RESPONSE'
 
 // ------------------------------------
 // Actions
@@ -10,6 +13,13 @@ export function increment (value = 1) {
   return {
     type: COUNTER_INCREMENT,
     payload: value
+  }
+}
+
+export function receiveLoginResponse(loginResponse) {
+  return {
+    type: RECEIVE_LOGIN_RESPONSE,
+    payload: loginResponse
   }
 }
 
@@ -29,6 +39,31 @@ export const doubleAsync = () => {
         resolve()
       }, 200)
     })
+  }
+}
+
+export const submitLogin = (loginFormData) => {
+  const postBody = {
+    user: {
+      email:loginFormData.email,
+      password: loginFormData.password
+    }
+  }
+  var myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+  return (dispatch) => {
+
+    return fetch(`http://localhost:4000/auth/login`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(postBody),
+        headers: myHeaders
+      })
+     .then(response => response.json())
+     .then(json =>
+       console.log(json)
+     )
   }
 }
 
