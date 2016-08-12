@@ -5,6 +5,7 @@ import fetch from 'isomorphic-fetch'
 // ------------------------------------
 export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 export const RECEIVE_LOGIN_RESPONSE = 'RECEIVE_LOGIN_RESPONSE'
+export const RECEIVE_REGISTER_RESPONSE = 'RECEIVE_REGISTER_RESPONSE'
 
 // ------------------------------------
 // Actions
@@ -20,6 +21,13 @@ export function receiveLoginResponse(loginResponse) {
   return {
     type: RECEIVE_LOGIN_RESPONSE,
     payload: loginResponse
+  }
+}
+
+export function receiveRegisterResponse(registerResponse) {
+  return {
+    type: RECEIVE_REGISTER_RESPONSE,
+    payload: registerResponse
   }
 }
 
@@ -62,27 +70,63 @@ export const submitLogin = (loginFormData) => {
       })
      .then(response => response.json())
      .then(json =>
-       console.log(json)
+       dispatch(receiveLoginResponse(json))
      )
+  }
+}
+
+export const submitRegister = (RegisterFormData) => {
+  const postBody = {
+    user: {
+      name: RegisterFormData.name,
+      email: RegisterFormData.email,
+      password: RegisterFormData.password
+    }
+  }
+  var myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+  return (dispatch) => {
+
+    return fetch(`http://localhost:4000/auth`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(postBody),
+        headers: myHeaders
+      })
+     .then(response => response.json())
+     .then(json => {
+       dispatch(receiveRegisterResponse(json))
+    })
   }
 }
 
 export const actions = {
   increment,
-  doubleAsync
+  doubleAsync,
+  submitLogin,
+  submitRegister
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [COUNTER_INCREMENT]: (state, action) => state + action.payload
+  [RECEIVE_REGISTER_RESPONSE]: (state, action) => {
+    return Object.assign({}, state, {registerData: action.payload})
+  },
+
+  [RECEIVE_LOGIN_RESPONSE]: (state, action) => Object.assign({}, state, {loginData: action.payload})
+
+
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = 0
+const initialState = {
+
+}
 export default function counterReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

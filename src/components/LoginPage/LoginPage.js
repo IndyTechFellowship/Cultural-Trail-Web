@@ -1,28 +1,33 @@
 import React from 'react'
 import classes from './LoginPage.scss'
 import {Panel, Tabs, Tab, Form, FormGroup, FormControl, Col, Button,} from 'react-bootstrap'
-import {reduxForm, Field} from 'redux-form';
+import {reduxForm, Field} from 'redux-form'
+import _ from 'lodash'
 
 export const LoginPage = (props) => (
   <div>
     <Panel>
       <Tabs defaultActiveKey={1} id="login-register-tabs">
-        <Tab eventKey={1} title="Log In">
+        <Tab eventKey={1} title="Log In" onClick={console.log(props)}>
           <div>
-            <MyForm onSubmit={values => {props.submitLogin(values)}}/>
+            <LoginForm loginResponse={props.loginResponse} onSubmit={values => {props.submitLogin(values)}}/>
           </div>
         </Tab>
-        <Tab eventKey={2} title="Register">Register</Tab>
+        <Tab eventKey={2} title="Register">
+          <RegisterForm registerResponse={props.registerResponse} onSubmit={values => props.submitRegister(values)}/>
+        </Tab>
       </Tabs>
     </Panel>
   </div>
 )
 
 LoginPage.propTypes = {
-  counter: React.PropTypes.number.isRequired,
+  registerResponse: React.PropTypes.object,
+  loginResponse: React.PropTypes.object,
   doubleAsync: React.PropTypes.func.isRequired,
   increment: React.PropTypes.func.isRequired,
-  submitLogin: React.PropTypes.func.isRequired
+  submitLogin: React.PropTypes.func.isRequired,
+  submitRegister: React.PropTypes.func.isRequired
 }
 /*
 const renderInput = (props) => (
@@ -34,6 +39,39 @@ const renderInput = (props) => (
   </div>
 )
 */
+
+class RenderResponse extends React.Component {
+  render() {
+      const responseExists = !_.isUndefined(this.props.response)
+      if(responseExists) {
+
+        const hasEmailError = _.has(this.props.response, 'errors.email')
+        const hasError = _.has(this.props.response, 'error')
+        const hasData = _.has(this.props.response, 'data')
+        if(hasEmailError) {
+          return(
+            <div>
+              That email has already been uses. Try signing in.
+            </div>
+          )
+        } else if(hasData) {
+          return(
+            <div>
+              Please check your inbox for a confirmation email.
+            </div>
+          )
+        } else if(hasError) {
+          return(
+            <div>
+              {this.props.response.error}
+            </div>
+          )
+        }
+      } else {
+        return(null)
+    }
+  }
+}
 
 class renderInput extends React.Component {
   render() {
@@ -48,9 +86,10 @@ class renderInput extends React.Component {
   }
 }
 
-class MyForm extends React.Component {
+class LoginForm extends React.Component {
   render() {
     const { handleSubmit } = this.props
+    console.log(this.props)
     return (
       <Form horizontal onSubmit={handleSubmit}>
         <FormGroup controlId="formHorizontalEmail">
@@ -70,9 +109,73 @@ class MyForm extends React.Component {
           </Col>
         </FormGroup>
         <FormGroup>
+          <Col sm={2}>
+          </Col>
+          <Col sm={10}>
+            <RenderResponse response={this.props.loginResponse}/>
+          </Col>
+        </FormGroup>
+        <FormGroup>
           <Col smOffset={2} sm={10}>
             <Button type="button" onClick={handleSubmit}>
               Login
+            </Button>
+          </Col>
+        </FormGroup>
+      </Form>
+    )
+  }
+}
+
+
+class RegisterForm extends React.Component {
+  render() {
+    const { handleSubmit } = this.props
+    return (
+      <Form horizontal onSubmit={handleSubmit}>
+        <FormGroup controlId="formHorizontalName">
+          <Col sm={2}>
+            Name
+          </Col>
+          <Col sm={10}>
+            <Field name="name" component={renderInput} type="text" />
+          </Col>
+        </FormGroup>
+        <FormGroup controlId="formHorizontalEmail">
+          <Col sm={2}>
+            Email
+          </Col>
+          <Col sm={10}>
+            <Field name="email" component={renderInput} type="text" />
+          </Col>
+        </FormGroup>
+        <FormGroup controlId="formHorizontalPassword">
+          <Col sm={2}>
+            Password
+          </Col>
+          <Col sm={10}>
+            <Field name="password" component={renderInput} type="password" />
+          </Col>
+        </FormGroup>
+        <FormGroup controlId="formHorizontalPasswordConfirm">
+          <Col sm={2}>
+            Confirm Password
+          </Col>
+          <Col sm={10}>
+            <Field name="passwordConfirm" component={renderInput} type="password" />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col sm={2}>
+          </Col>
+          <Col sm={10}>
+            <RenderResponse response={this.props.registerResponse}/>
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col smOffset={2} sm={10}>
+            <Button type="button" onClick={handleSubmit}>
+              Register
             </Button>
           </Col>
         </FormGroup>
@@ -95,13 +198,28 @@ const validate = values => {
   } else if(values.password.length < 5) {
     errors.password = 'must me more then 5 characters'
   }
+
+  if(!values.name) {
+    errors.name = 'Required'
+  }
+
+  if(!values.passwordConfirm) {
+    errors.passwordConfirm = 'Required'
+  } else if(values.password !== values.passwordConfirm) {
+    errors.passwordConfirm = 'password fields must be the same'
+  }
   return errors
 }
 
-MyForm = reduxForm({
-  form: 'myForm',
+LoginForm = reduxForm({
+  form: 'loginForm',
   validate
-})(MyForm)
+})(LoginForm)
+
+RegisterForm = reduxForm({
+  form: 'registerForm',
+  validate
+})(RegisterForm)
 
 
 
