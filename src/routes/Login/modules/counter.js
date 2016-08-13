@@ -1,4 +1,7 @@
 import fetch from 'isomorphic-fetch'
+import apiRoute from '../../../util/ApiRoute'
+
+const apiBaseRoute = apiRoute()
 
 // ------------------------------------
 // Constants
@@ -61,7 +64,7 @@ export const submitLogin = (loginFormData) => {
   myHeaders.append('Content-Type', 'application/json');
   return (dispatch) => {
 
-    return fetch(`http://localhost:4000/auth/login`,
+    return fetch(`${apiBaseRoute}/auth/login`,
       {
         method: 'POST',
         mode: 'cors',
@@ -87,7 +90,7 @@ export const submitRegister = (RegisterFormData) => {
   myHeaders.append('Content-Type', 'application/json');
   return (dispatch) => {
 
-    return fetch(`http://localhost:4000/auth`,
+    return fetch(`${apiBaseRoute}/auth`,
       {
         method: 'POST',
         mode: 'cors',
