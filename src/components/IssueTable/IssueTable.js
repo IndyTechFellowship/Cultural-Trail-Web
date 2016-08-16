@@ -3,7 +3,7 @@ import classes from './IssueTable.scss';
 
 // components
 import { Table } from 'react-bootstrap';
-import IssueRow from 'components/Issue/IssueRow';
+import IssueRow from './IssueRow';
 
 export const IssueTable = (props) => (
   <div>
@@ -21,9 +21,9 @@ export const IssueTable = (props) => (
         </tr>
       </thead>
       <tbody>
-        <IssueRow/>
-        <IssueRow/>
-        <IssueRow/>
+        {props.issues.map(function(issue){
+          return <IssueRow issue={issue} />;
+        })}
       </tbody>
     </Table>
   </div>
