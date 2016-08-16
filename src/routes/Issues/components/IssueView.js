@@ -1,15 +1,16 @@
-import React from 'react'
-import classes from './IssueView.scss'
+import React from 'react';
+import classes from './IssueView.scss';
 
 // components
-import { Grid } from 'react-bootstrap'
+import { Grid } from 'react-bootstrap';
+import IssueTable  from 'components/Issue/IssueTable';
 
 export const IssueView = () => (
   <div>
     <Grid fluid={true}>
-        Hey, it's the issues
+        <IssueTable />
     </Grid>
   </div>
-)
+);
 
 export default IssueView
