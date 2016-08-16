@@ -18,6 +18,9 @@ export const Header = () => (
           <NavItem>Dashboard</NavItem>
         </IndexLinkContainer>
         <LinkContainer to="/counter">
+          <NavItem>Counter</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/issues">
           <NavItem>Issues</NavItem>
         </LinkContainer>
       </Nav>
