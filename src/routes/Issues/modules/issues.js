@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch'
 import apiRoute from '../../../util/ApiRoute'
 
 const apiBaseRoute = apiRoute()
+const apiToken = ''
 
 // ------------------------------------
 // Constants
@@ -29,7 +30,7 @@ export function receiveGetIssuesResponse(getIssuesResponse) {
 export const getIssues = () => {
   var myHeaders = new Headers();
   myHeaders.append('Content-Type', 'application/json');
-  myHeaders.append('api-token', 'Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyMH0.OXW2F2GXKE3-yunK9u9ybOqey6L4PH-AziHPWvznm_4')
+  myHeaders.append('api-token', `Token: ${apiToken}`)
   return (dispatch) => {
 
     return fetch(`${apiBaseRoute}/api/issues`,
