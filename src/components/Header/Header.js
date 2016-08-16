@@ -10,14 +10,14 @@ export const Header = () => (
     <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="#">Cultural Trail</a>
+          <a href="/">Cultural Trail</a>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
         <IndexLinkContainer to="/">
           <NavItem>Dashboard</NavItem>
         </IndexLinkContainer>
-        <LinkContainer to="/counter">
+        <LinkContainer to="/issues">
           <NavItem>Issues</NavItem>
         </LinkContainer>
       </Nav>
