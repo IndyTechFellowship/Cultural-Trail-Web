@@ -18,6 +18,7 @@ export const IssueTable = (props) => (
           <th>resolved date</th>
           <th>reported date</th>
           <th>reported by</th>
+          <th>view details</th>
         </tr>
       </thead>
       <tbody>

@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch'
 import apiRoute from '../../../util/ApiRoute'
 
 const apiBaseRoute = apiRoute()
-const apiToken = ''
+const apiToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5fQ.EKs8HFo98bpBKcnuHrPCJxnAWf1Riv4HocWXE9bPk8U'
 
 // ------------------------------------
 // Constants
