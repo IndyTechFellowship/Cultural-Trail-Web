@@ -2,6 +2,9 @@ import fetch from 'isomorphic-fetch'
 import Lockr from 'lockr'
 import _ from 'lodash'
 import { push } from 'react-router-redux'
+import apiRoute from '../../../util/ApiRoute'
+
+const apiBaseRoute = apiRoute()
 
 // ------------------------------------
 // Constants
@@ -64,7 +67,7 @@ export const submitLogin = (loginFormData) => {
   myHeaders.append('Content-Type', 'application/json');
   return (dispatch) => {
 
-    return fetch(`http://localhost:4000/auth/login`,
+    return fetch(`${apiBaseRoute}/auth/login`,
       {
         method: 'POST',
         mode: 'cors',
@@ -81,8 +84,7 @@ export const submitLogin = (loginFormData) => {
          dispatch(push('/'))
        }
        dispatch(receiveLoginResponse(json))
-      }
-     )
+     })
   }
 }
 
@@ -98,7 +100,7 @@ export const submitRegister = (RegisterFormData) => {
   myHeaders.append('Content-Type', 'application/json');
   return (dispatch) => {
 
-    return fetch(`http://localhost:4000/auth`,
+    return fetch(`${apiBaseRoute}/auth`,
       {
         method: 'POST',
         mode: 'cors',
@@ -107,7 +109,6 @@ export const submitRegister = (RegisterFormData) => {
       })
      .then(response => response.json())
      .then(json => {
-
        dispatch(receiveRegisterResponse(json))
     })
   }
