@@ -1,4 +1,7 @@
 import fetch from 'isomorphic-fetch'
+import Lockr from 'lockr'
+import _ from 'lodash'
+import { push } from 'react-router-redux'
 
 // ------------------------------------
 // Constants
@@ -69,8 +72,16 @@ export const submitLogin = (loginFormData) => {
         headers: myHeaders
       })
      .then(response => response.json())
-     .then(json =>
+     .then(json => {
+       const hasToken = _.has(json, 'data.token')
+       const hasId = _.has(json, 'data.user_id')
+       if(hasToken && hasId) {
+         Lockr.set('token', json.data.token)
+         Lockr.set('userId', json.data.user_id)
+         dispatch(push('/'))
+       }
        dispatch(receiveLoginResponse(json))
+      }
      )
   }
 }
@@ -96,6 +107,7 @@ export const submitRegister = (RegisterFormData) => {
       })
      .then(response => response.json())
      .then(json => {
+
        dispatch(receiveRegisterResponse(json))
     })
   }

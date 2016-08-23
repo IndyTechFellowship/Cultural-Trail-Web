@@ -10,7 +10,7 @@ export const LoginPage = (props) => (
       <Tabs defaultActiveKey={1} id="login-register-tabs">
         <Tab eventKey={1} title="Log In" onClick={console.log(props)}>
           <div>
-            <LoginForm loginResponse={props.loginResponse} onSubmit={values => {props.submitLogin(values)}}/>
+            <LoginForm loginResponse={props.loginResponse} onSubmit={values => {console.log(props);props.submitLogin(values)}}/>
           </div>
         </Tab>
         <Tab eventKey={2} title="Register">
