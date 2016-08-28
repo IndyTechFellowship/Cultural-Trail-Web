@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import { getIssues } from '../modules/issues'
+import { getIssues, resetGetIssuesResponse} from '../modules/issues'
+
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -7,13 +8,16 @@ import { getIssues } from '../modules/issues'
     component - in this case, the counter:   */
 
 import IssuesPage from 'components/IssuesPage'
+import {requireAuthentication} from '../../../components/AuthenticatedComponent';
+
 
 /*  Object of action creators (can also be function that returns object).
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-  getIssues
+  getIssues,
+  resetGetIssuesResponse
 }
 
 const mapStateToProps = (state) => ({

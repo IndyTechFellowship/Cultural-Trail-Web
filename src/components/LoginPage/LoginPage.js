@@ -8,9 +8,9 @@ export const LoginPage = (props) => (
   <div>
     <Panel>
       <Tabs defaultActiveKey={1} id="login-register-tabs">
-        <Tab eventKey={1} title="Log In" onClick={console.log(props)}>
+        <Tab eventKey={1} title="Log In">
           <div>
-            <LoginForm loginResponse={props.loginResponse} onSubmit={values => {console.log(props);props.submitLogin(values)}}/>
+            <LoginForm loginResponse={props.loginResponse} onSubmit={values => {props.submitLogin(values)}}/>
           </div>
         </Tab>
         <Tab eventKey={2} title="Register">
@@ -89,7 +89,6 @@ class renderInput extends React.Component {
 class LoginForm extends React.Component {
   render() {
     const { handleSubmit } = this.props
-    console.log(this.props)
     return (
       <Form horizontal onSubmit={handleSubmit}>
         <FormGroup controlId="formHorizontalEmail">

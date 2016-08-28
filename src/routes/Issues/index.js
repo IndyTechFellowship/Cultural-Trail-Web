@@ -1,4 +1,5 @@
 import { injectReducer } from '../../store/reducers'
+import {requireAuthentication} from '../../components/AuthenticatedComponent';
 
 export default (store) => ({
   path: '/issues',
@@ -11,12 +12,13 @@ export default (store) => ({
           dependencies for bundling   */
       const IssuesPage = require('./containers/IssuesContainer').default
       const reducer = require('./modules/issues').default
+      const AuthenticatedIssuesPage = requireAuthentication(IssuesPage)
 
       /*  Add the reducer to the store on key 'counter'  */
       injectReducer(store, { key: 'issuesPage', reducer })
 
       /*  Return getComponent   */
-      cb(null, IssuesPage)
+      cb(null, AuthenticatedIssuesPage)
 
     /* Webpack named bundle   */
   }, 'issues')

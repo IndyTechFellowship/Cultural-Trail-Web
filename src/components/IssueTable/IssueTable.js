@@ -1,9 +1,21 @@
 import React from 'react';
 import classes from './IssueTable.scss';
+import _ from 'lodash'
 
 // components
 import { Table } from 'react-bootstrap';
 import IssueRow from './IssueRow';
+
+const renderIssueRow = (props) => {
+  const hasData = _.has(props, 'issues')
+  if(hasData && props.issues !== undefined){
+    return props.issues.map((issue) => {
+      return <IssueRow issue={issue} key={issue.id}/>
+    })
+  } else {
+    return(null)
+  }
+}
 
 export const IssueTable = (props) => (
   <div>
@@ -22,12 +34,12 @@ export const IssueTable = (props) => (
         </tr>
       </thead>
       <tbody>
-        {props.issues.map(function(issue){
-          return <IssueRow issue={issue} />;
-        })}
+        {renderIssueRow(props)}
       </tbody>
     </Table>
   </div>
 );
+
+
 
 export default IssueTable
