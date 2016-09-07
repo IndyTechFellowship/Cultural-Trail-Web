@@ -2,3 +2,30 @@
   font-weight: bold;
   text-decoration: underline;
 }
+
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.img {
+  height: 25px;
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background: rgb(0,168,220);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+}
+
+.user {
+  color: rgb(0,168,220);
+  margin-left: 10px;
+}

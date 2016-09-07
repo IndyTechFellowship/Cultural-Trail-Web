@@ -1,0 +1,60 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+$blue: rgb(0,168,220);
+$gray: rgb(174,174,174);
+
+nav.navbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: white;
+  border: none;
+  box-shadow: none;
+  border-bottom: 10px solid $blue;
+  margin-bottom: 100px;
+
+  .container {
+    display: flex;
+    justify-content: center;
+
+    ul.nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+
+      li {
+        color: $gray;
+        .arrow {
+          display: block;
+          position: absolute;
+          bottom: 0;
+          left: calc(50% - 8px);
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-bottom: 8px solid $blue;
+          height: 0px;
+          width: 0px;
+          display: none;
+        }
+        &.active {
+          a {
+            box-shadow: none;
+            background: white;
+            color: $blue;
+          }
+          .arrow {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .navbar-header {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
