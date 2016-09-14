@@ -1,13 +1,15 @@
 import fetch from 'isomorphic-fetch'
 import apiRoute from '../../../util/ApiRoute'
+import Lockr from 'lockr'
 
 const apiBaseRoute = apiRoute()
-const apiToken = ''
+//const apiToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5fQ.EKs8HFo98bpBKcnuHrPCJxnAWf1Riv4HocWXE9bPk8U'
 
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const RECEIVE_GET_ISSUES_RESPONSE = 'RECEIVE_GET_ISSUES_RESPONSE'
+export const RESET_ISSUES_RESPONSE = 'RESET_ISSUES_RESPONSE'
 
 // ------------------------------------
 // Actions
@@ -16,6 +18,12 @@ export function receiveGetIssuesResponse(getIssuesResponse) {
   return {
     type: RECEIVE_GET_ISSUES_RESPONSE,
     payload: getIssuesResponse
+  }
+}
+
+export function resetGetIssuesResponse() {
+  return {
+    type: RESET_ISSUES_RESPONSE
   }
 }
 
@@ -29,6 +37,7 @@ export function receiveGetIssuesResponse(getIssuesResponse) {
 
 export const getIssues = () => {
   var myHeaders = new Headers();
+  const apiToken = Lockr.get('token')
   myHeaders.append('Content-Type', 'application/json');
   myHeaders.append('api-token', `Token: ${apiToken}`)
   return (dispatch) => {
@@ -47,7 +56,8 @@ export const getIssues = () => {
 }
 
 export const actions = {
-  getIssues
+  getIssues,
+  resetGetIssuesResponse
 }
 
 // ------------------------------------
@@ -56,6 +66,10 @@ export const actions = {
 const ACTION_HANDLERS = {
   [RECEIVE_GET_ISSUES_RESPONSE]: (state, action) => {
     return Object.assign({}, state, {issuesData: action.payload})
+  },
+
+  [RESET_ISSUES_RESPONSE]: (state, action) => {
+    return Object.assign({}, state, {issuesData: undefined})
   }
 }
 

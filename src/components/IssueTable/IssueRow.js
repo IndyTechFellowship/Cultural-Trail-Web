@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './IssueRow.scss'
 
 // components
-import { } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 export const IssueRow = (props) => (
   <tr key={props.issue.id}>
@@ -14,6 +14,9 @@ export const IssueRow = (props) => (
     <td>{props.issue.resolvedDate}</td>
     <td>{props.issue.reportedDate}</td>
     <td>{props.issue.reportedBy}</td>
+    <td>
+        <Button bsStyle="link" >view details</Button>
+    </td>
   </tr>
 );
 

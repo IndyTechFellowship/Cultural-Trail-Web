@@ -2,14 +2,24 @@
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import Dashboard from './Dashboard'
 import IssuesRoute from './Issues'
+import LoginRoute from './Login'
+import {requireAuthentication} from '../components/AuthenticatedComponent';
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
 export const createRoutes = (store) => ({
   path: '/',
-  component: CoreLayout,
-  indexRoute: IssuesRoute(store)
+  component: requireAuthentication(CoreLayout),
+  indexRoute: IssuesRoute(store),
+  getChildRoutes (location, cb) {
+        require.ensure([], (require) => {
+          cb(null, [
+            require('./Issues').default(store),
+            require('./Login').default(store)
+          ])
+        })
+      }
 })
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
