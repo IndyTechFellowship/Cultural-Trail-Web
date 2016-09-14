@@ -9,10 +9,7 @@ import IssuesRoute from './Issues'
 export const createRoutes = (store) => ({
   path: '/',
   component: CoreLayout,
-  indexRoute: Dashboard,
-  childRoutes: [
-    IssuesRoute(store)
-  ]
+  indexRoute: IssuesRoute(store)
 })
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically

@@ -19,7 +19,6 @@ export default class IssuesPage extends React.Component {
     }
     return (
       <div>
-        <h1>Issues</h1>
         {content}
       </div>
     );
