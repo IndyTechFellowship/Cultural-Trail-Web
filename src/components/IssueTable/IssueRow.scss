@@ -1,0 +1,20 @@
+.selected {
+  background: lightgray;
+}
+
+.not-selected:hover {
+  cursor: pointer;
+  background: rgb(230, 230, 230);
+}
+
+.removeIcon {
+  color: firebrick;
+}
+
+.okIcon {
+  color: darkgreen;
+}
+
+.resolved {
+  text-align: center;
+}

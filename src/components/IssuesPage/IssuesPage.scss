@@ -1,12 +1,19 @@
-.counter {
-  font-weight: bold;
+.container {
+  border: 1px solid silver;
+  position: relative;
 }
 
-.counter--green {
-  composes: counter;
-  color: rgb(25,200,25);
+.main {
+  padding: 0 0 0 0;
 }
 
-.counterContainer {
-  margin: 1em auto;
+.row {
+  position: relative;
+  height: 100%;
+}
+
+.sidebar {
+  border-left: 1px solid silver;
+  background: lightgray;
+  overflow: auto;
 }

@@ -1,6 +1,5 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
-import Dashboard from './Dashboard'
 import IssuesRoute from './Issues'
 import LoginRoute from './Login'
 import {requireAuthentication} from '../components/AuthenticatedComponent';

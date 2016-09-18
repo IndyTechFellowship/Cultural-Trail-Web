@@ -10,6 +10,7 @@ const apiBaseRoute = apiRoute()
 // ------------------------------------
 export const RECEIVE_GET_ISSUES_RESPONSE = 'RECEIVE_GET_ISSUES_RESPONSE'
 export const RESET_ISSUES_RESPONSE = 'RESET_ISSUES_RESPONSE'
+export const SELECT_ISSUE = 'SELECT_ISSUE'
 
 // ------------------------------------
 // Actions
@@ -24,6 +25,13 @@ export function receiveGetIssuesResponse(getIssuesResponse) {
 export function resetGetIssuesResponse() {
   return {
     type: RESET_ISSUES_RESPONSE
+  }
+}
+
+export function selectIssue(issueId) {
+  return {
+    type: SELECT_ISSUE,
+    payload: issueId
   }
 }
 
@@ -57,7 +65,8 @@ export const getIssues = () => {
 
 export const actions = {
   getIssues,
-  resetGetIssuesResponse
+  resetGetIssuesResponse,
+  selectIssue
 }
 
 // ------------------------------------
@@ -70,6 +79,10 @@ const ACTION_HANDLERS = {
 
   [RESET_ISSUES_RESPONSE]: (state, action) => {
     return Object.assign({}, state, {issuesData: undefined})
+  },
+
+  [SELECT_ISSUE]: (state, action) => {
+    return Object.assign({}, state, {selectedIssue: action.payload})
   }
 }
 
@@ -77,7 +90,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-
+  selectedIssue: 3
 }
 export default function issuesReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

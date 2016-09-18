@@ -2,7 +2,6 @@ import { injectReducer } from '../../store/reducers'
 import {requireAuthentication} from '../../components/AuthenticatedComponent';
 
 export default (store) => ({
-  path: '/issues',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
