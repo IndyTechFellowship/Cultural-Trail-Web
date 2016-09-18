@@ -1,29 +1,27 @@
 import { connect } from 'react-redux'
-import { getIssues, resetGetIssuesResponse, selectIssue } from '../modules/issues'
-
+import { increment, doubleAsync, submitLogin, submitRegister} from '../modules/counter'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
     wiring in the actions and state necessary to render a presentational
     component - in this case, the counter:   */
 
-import IssuesPage from 'components/IssuesPage'
-import {requireAuthentication} from '../../../components/AuthenticatedComponent';
-
+import LoginPage from 'components/LoginPage'
 
 /*  Object of action creators (can also be function that returns object).
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-  getIssues,
-  resetGetIssuesResponse,
-  selectIssue
+  increment: () => increment(1),
+  doubleAsync,
+  submitLogin,
+  submitRegister
 }
 
 const mapStateToProps = (state) => ({
-  getIssuesResponse: state.issuesPage.issuesData,
-  getSelectedIssue: state.issuesPage.selectedIssue
+  registerResponse: state.loginPage.registerData,
+  loginResponse: state.loginPage.loginData
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
@@ -40,4 +38,4 @@ const mapStateToProps = (state) => ({
     Selectors are composable. They can be used as input to other selectors.
     https://github.com/reactjs/reselect    */
 
-export default connect(mapStateToProps, mapDispatchToProps)(IssuesPage)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)

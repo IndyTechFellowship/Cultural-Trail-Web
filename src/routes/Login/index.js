@@ -1,7 +1,7 @@
 import { injectReducer } from '../../store/reducers'
-import {requireAuthentication} from '../../components/AuthenticatedComponent';
 
 export default (store) => ({
+  path: '/login',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -9,17 +9,16 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const IssuesPage = require('./containers/IssuesContainer').default
-      const reducer = require('./modules/issues').default
-      const AuthenticatedIssuesPage = requireAuthentication(IssuesPage)
+      const LoginPage = require('./containers/LoginContainer').default
+      const reducer = require('./modules/counter').default
 
       /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'issuesPage', reducer })
+      injectReducer(store, { key: 'loginPage', reducer })
 
       /*  Return getComponent   */
-      cb(null, AuthenticatedIssuesPage)
+      cb(null, LoginPage)
 
     /* Webpack named bundle   */
-  }, 'issues')
+    }, 'counter')
   }
 })
