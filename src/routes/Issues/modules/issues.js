@@ -74,7 +74,7 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [RECEIVE_GET_ISSUES_RESPONSE]: (state, action) => {
-    return Object.assign({}, state, {issuesData: action.payload})
+    return Object.assign({}, state, {issuesData: action.payload, selectedIssue: action.payload.data[0].id})
   },
 
   [RESET_ISSUES_RESPONSE]: (state, action) => {
@@ -90,7 +90,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-  selectedIssue: 3
+  selectedIssue: -1
 }
 export default function issuesReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
