@@ -4,7 +4,6 @@ import _ from 'lodash'
 import moment from 'moment'
 
 import  { Image, Glyphicon } from 'react-bootstrap'
-import GoogleMap from 'google-map-react'
 
 const isResolved = (open) => (
   open ? <Glyphicon glyph="remove" className={classes.removeIcon} /> : <Glyphicon glyph="ok" className={classes.okIcon} />
