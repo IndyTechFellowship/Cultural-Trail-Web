@@ -11,6 +11,7 @@ const apiBaseRoute = apiRoute()
 export const RECEIVE_GET_ISSUES_RESPONSE = 'RECEIVE_GET_ISSUES_RESPONSE'
 export const RESET_ISSUES_RESPONSE = 'RESET_ISSUES_RESPONSE'
 export const SELECT_ISSUE = 'SELECT_ISSUE'
+export const RECEIVE_GET_ADDRESS_RESPONSE = 'RECEIVE_GET_ADDRESS_RESPONSE'
 
 // ------------------------------------
 // Actions
@@ -32,6 +33,14 @@ export function selectIssue(issueId) {
   return {
     type: SELECT_ISSUE,
     payload: issueId
+  }
+}
+
+export function receiveGetAddressResponse(getAddressResponse) {
+  console.log(getAddressResponse)
+  return {
+    type: RECEIVE_GET_ADDRESS_RESPONSE,
+    payload: getAddressResponse
   }
 }
 
@@ -63,10 +72,26 @@ export const getIssues = () => {
   }
 }
 
+export const getAddress = (lat,lng) => {
+  var myHeaders = new Headers();
+  const apiKey = "AIzaSyDu02M2GXzpZY7dt0eln8g3GuOlGvnWG-w"
+  myHeaders.append('latlng', `${lat},${lng}`)
+  myHeaders.append('key', apiKey)
+  return (dispatch) => {
+
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`)
+     .then(response => response.json())
+     .then(json =>
+       dispatch(receiveGetAddressResponse(json))
+     )
+  }
+}
+
 export const actions = {
   getIssues,
   resetGetIssuesResponse,
-  selectIssue
+  selectIssue,
+  getAddress
 }
 
 // ------------------------------------
@@ -83,6 +108,10 @@ const ACTION_HANDLERS = {
 
   [SELECT_ISSUE]: (state, action) => {
     return Object.assign({}, state, {selectedIssue: action.payload})
+  },
+
+  [RECEIVE_GET_ADDRESS_RESPONSE]: (state, action) => {
+    return Object.assign({}, state, {address: action.payload})
   }
 }
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { getIssues, resetGetIssuesResponse, selectIssue } from '../modules/issues'
+import { getIssues, resetGetIssuesResponse, selectIssue, getAddress } from '../modules/issues'
 
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -18,12 +18,14 @@ import {requireAuthentication} from '../../../components/AuthenticatedComponent'
 const mapDispatchToProps = {
   getIssues,
   resetGetIssuesResponse,
-  selectIssue
+  selectIssue,
+  getAddress
 }
 
 const mapStateToProps = (state) => ({
   getIssuesResponse: state.issuesPage.issuesData,
-  getSelectedIssue: state.issuesPage.selectedIssue
+  getSelectedIssue: state.issuesPage.selectedIssue,
+  getAddressResponse: state.issuesPage.address
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

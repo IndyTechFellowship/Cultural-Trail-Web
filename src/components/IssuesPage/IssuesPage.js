@@ -31,7 +31,8 @@ export default class IssuesPage extends React.Component {
                   _.find(
                     this.props.getIssuesResponse.data,
                     (issue) => (issue.id == this.props.getSelectedIssue)
-                  )} />
+                  )}
+                  {...this.props} />
             </Col>
           </Row>
         </Grid>)
