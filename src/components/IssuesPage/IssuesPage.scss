@@ -16,4 +16,13 @@
   border-left: 1px solid silver;
   background: lightgray;
   overflow: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &.affixed {
+    position: fixed;
+    width: 37%;
+    right: 5%;
+  }
 }

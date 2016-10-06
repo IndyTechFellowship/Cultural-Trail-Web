@@ -11,6 +11,26 @@ import { Grid, Row, Col } from 'react-bootstrap'
 export default class IssuesPage extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      affix: false
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = (e) => {
+    const offset = 139;
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+    this.setState({
+      affix: scrollTop >= offset
+    });
   }
 
   render() {
@@ -26,7 +46,7 @@ export default class IssuesPage extends React.Component {
             <Col md={7} className={classes.main}>
               <IssueTable issues={this.props.getIssuesResponse.data} selected={this.props.getSelectedIssue} onSelect={this.props.selectIssue}/>
             </Col>
-            <Col md={5} className={classes.sidebar}>
+            <Col md={5} className={classes.sidebar + ' ' + (this.state.affix ? classes.affixed : '')}>
               <IssueDetails issue={
                   _.find(
                     this.props.getIssuesResponse.data,
