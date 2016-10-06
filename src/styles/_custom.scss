@@ -58,3 +58,13 @@ nav.navbar {
     }
   }
 }
+
+.affix-top {
+    /* Initial items */
+}
+
+.affix {
+    top:50px;
+    right:0;
+    position:fixed;
+}
