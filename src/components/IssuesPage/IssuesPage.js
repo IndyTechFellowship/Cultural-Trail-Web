@@ -33,8 +33,13 @@ export default class IssuesPage extends React.Component {
     });
   }
 
+  selectIssue = (issue) => {
+    this.props.resetGetAddressResponse()
+    this.props.selectIssue(issue)
+  }
+
   render() {
-    let content = <div>Nothing to show</div>
+    let content = <div className={classes.empty}>No issues found. Are you logged in?</div>
     if(this.props.getIssuesResponse) {
       const hasError = _.has(this.props.getIssuesResponse, 'error')
       if(hasError && this.props.getIssuesResponse.error === 'Unauthorized') {
@@ -56,12 +61,26 @@ export default class IssuesPage extends React.Component {
             </Col>
           </Row>
         </Grid>)
+        content = (
+          <div className={classes['flex-container']}>
+            <div className={classes.issuesList}>
+              <IssueTable issues={this.props.getIssuesResponse.data} selected={this.props.getSelectedIssue} onSelect={this.selectIssue}/>
+            </div>
+            <div className={classes.issueDetails}>
+              <IssueDetails issue={
+                _.find(
+                  this.props.getIssuesResponse.data,
+                  (issue) => (issue.id == this.props.getSelectedIssue)
+                )}
+                {...this.props} />
+            </div>
+          </div>
+        )
     } else {
       this.props.getIssues()
     }
     return (
-      <div>
-        <h3>Issues</h3>
+      <div className={classes.wrapper}>
         {content}
       </div>
     )
@@ -74,4 +93,5 @@ IssuesPage.propTypes = {
   resetGetIssuesResponse: React.PropTypes.func.isRequired,
   selectIssue: React.PropTypes.func.isRequired,
   getSelectedIssue: React.PropTypes.number.isRequired,
+  resetGetAddressResponse: React.PropTypes.func.isRequired
 }

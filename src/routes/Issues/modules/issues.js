@@ -12,6 +12,7 @@ export const RECEIVE_GET_ISSUES_RESPONSE = 'RECEIVE_GET_ISSUES_RESPONSE'
 export const RESET_ISSUES_RESPONSE = 'RESET_ISSUES_RESPONSE'
 export const SELECT_ISSUE = 'SELECT_ISSUE'
 export const RECEIVE_GET_ADDRESS_RESPONSE = 'RECEIVE_GET_ADDRESS_RESPONSE'
+export const RESET_ADDRESS_RESPONSE = 'RESET_ADDRESS_RESPONSE'
 
 // ------------------------------------
 // Actions
@@ -37,10 +38,15 @@ export function selectIssue(issueId) {
 }
 
 export function receiveGetAddressResponse(getAddressResponse) {
-  console.log(getAddressResponse)
   return {
     type: RECEIVE_GET_ADDRESS_RESPONSE,
     payload: getAddressResponse
+  }
+}
+
+export function resetGetAddressResponse() {
+  return {
+    type: RESET_ADDRESS_RESPONSE
   }
 }
 
@@ -91,7 +97,8 @@ export const actions = {
   getIssues,
   resetGetIssuesResponse,
   selectIssue,
-  getAddress
+  getAddress,
+  resetGetAddressResponse
 }
 
 // ------------------------------------
@@ -112,7 +119,11 @@ const ACTION_HANDLERS = {
 
   [RECEIVE_GET_ADDRESS_RESPONSE]: (state, action) => {
     return Object.assign({}, state, {address: action.payload})
-  }
+  },
+
+  [RESET_ADDRESS_RESPONSE]: (state, action) => {
+    return Object.assign({}, state, {address: undefined})
+  },
 }
 
 // ------------------------------------

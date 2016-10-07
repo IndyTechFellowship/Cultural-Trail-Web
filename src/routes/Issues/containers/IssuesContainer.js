@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { getIssues, resetGetIssuesResponse, selectIssue, getAddress } from '../modules/issues'
+import { getIssues, resetGetIssuesResponse, selectIssue, getAddress, resetGetAddressResponse } from '../modules/issues'
 
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -19,7 +19,8 @@ const mapDispatchToProps = {
   getIssues,
   resetGetIssuesResponse,
   selectIssue,
-  getAddress
+  getAddress,
+  resetGetAddressResponse
 }
 
 const mapStateToProps = (state) => ({

@@ -5,19 +5,22 @@ import {reduxForm, Field} from 'redux-form'
 import _ from 'lodash'
 
 export const LoginPage = (props) => (
-  <div>
-    <Panel>
+  <div className={classes.wrapper}>
+    <h3>Indianapolis Cultural Trail</h3>
+    <div className={classes.tabsContainer}>
       <Tabs defaultActiveKey={1} id="login-register-tabs">
         <Tab eventKey={1} title="Log In">
-          <div>
+          <div className={classes.container}>
             <LoginForm loginResponse={props.loginResponse} onSubmit={values => {props.submitLogin(values)}}/>
           </div>
         </Tab>
         <Tab eventKey={2} title="Register">
-          <RegisterForm registerResponse={props.registerResponse} onSubmit={values => props.submitRegister(values)}/>
+          <div className={classes.container}>
+            <RegisterForm registerResponse={props.registerResponse} onSubmit={values => props.submitRegister(values)}/>
+          </div>
         </Tab>
       </Tabs>
-    </Panel>
+    </div>
   </div>
 )
 
@@ -115,11 +118,9 @@ class LoginForm extends React.Component {
           </Col>
         </FormGroup>
         <FormGroup>
-          <Col smOffset={2} sm={10}>
-            <Button type="button" onClick={handleSubmit}>
-              Login
-            </Button>
-          </Col>
+          <Button type="button" onClick={handleSubmit} className={classes.btn}>
+            Login
+          </Button>
         </FormGroup>
       </Form>
     )
@@ -172,11 +173,9 @@ class RegisterForm extends React.Component {
           </Col>
         </FormGroup>
         <FormGroup>
-          <Col smOffset={2} sm={10}>
-            <Button type="button" onClick={handleSubmit}>
-              Register
-            </Button>
-          </Col>
+          <Button type="button" onClick={handleSubmit} className={classes.btn}>
+            Register
+          </Button>
         </FormGroup>
       </Form>
     )

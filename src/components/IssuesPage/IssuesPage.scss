@@ -1,28 +1,33 @@
-.container {
-  border: 1px solid silver;
-  position: relative;
-}
+.wrapper {
+  margin: 50px;
+  box-shadow: 0px 0px 15px 1px rgba(38,50,56,1);
+  border-radius: 5px;
+  color: #263238;
+  background: white;
 
-.main {
-  padding: 0 0 0 0;
-}
+  .flex-container {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
 
-.row {
-  position: relative;
-  height: 100%;
-}
+    .issuesList {
+      flex: 1 1;
+      box-shadow: 0px 0px 5px 1px rgba(38,50,56,.5);
+      z-index: 1;
+    }
 
-.sidebar {
-  border-left: 1px solid silver;
-  background: lightgray;
-  overflow: auto;
-  position: absolute;
-  top: 0;
-  right: 0;
+    .issueDetails {
+      background: #90A4AE;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-left: 1px solid #607D8B;
+      width: 500px;
+    }
+  }
 
-  &.affixed {
-    position: fixed;
-    width: 37%;
-    right: 5%;
+  .empty {
+    padding: 50px;
+    text-align: center;
+    font-weight: bold;
   }
 }
