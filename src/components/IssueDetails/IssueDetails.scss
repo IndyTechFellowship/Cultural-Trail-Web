@@ -1,5 +1,11 @@
 .container {
-  padding: 30px 15px 30px 15px;
+  padding: 25px 25px 25px 25px;
+  position: fixed;
+  width: 500px;
+
+  a {
+    color: #263238;
+  }
 }
 
 .property {
@@ -13,6 +19,7 @@
 .image {
   width: 100%;
   border-radius: 2px;
+  border: 1px solid #546E7A;
 }
 
 .removeIcon {
